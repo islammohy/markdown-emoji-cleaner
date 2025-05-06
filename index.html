@@ -155,7 +155,8 @@
     .replace(/[\u{200D}]/gu, '')                   // zero-width joiner (👩‍🏫 etc.)
     .replace(/[\u{1F1E6}-\u{1F1FF}]/gu, '')        // flags
     .replace(/[\u{1F3FB}-\u{1F3FF}]/gu, '')        // skin tone modifiers
-    .replace(/\p{Emoji}/gu, '')
+    
+    .replace(/[\u{2300}-\u{23FF}]/gu, '')
 
     // Remove remaining invisible or control characters
     .replace(/[\u200B-\u200F\u202A-\u202E\u2060-\u206F]/gu, '')
