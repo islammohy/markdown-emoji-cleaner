@@ -1,61 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Markdown & Emoji Cleaner</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Markdown & Emoji Cleaner | igy-apps.com</title>
+  <link rel="icon" type="image/jpeg" href="images/logo.jpg">
+
   <style>
-    body { font-family: Arial, sans-serif; margin: 30px; }
-    textarea { width: 100%; height: 150px; margin-bottom: 10px; }
-    button { margin: 5px 5px 15px 0; padding: 8px 15px; }
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f4f7f9;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 900px;
+      width: 100%;
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #007acc;
+      margin-bottom: 10px;
+    }
+
+    .author {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 16px;
+      color: #007acc;
+    }
+
+    .author a {
+      color: #007acc;
+      text-decoration: none;
+    }
+
+    .author a:hover {
+      text-decoration: underline;
+    }
+
+    textarea {
+      width: 100%;
+      height: 150px;
+      padding: 15px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      resize: vertical;
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+
+    button {
+      background-color: #007acc;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 20px;
+      margin: 5px 10px 20px 0;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #005fa3;
+    }
+
+    .illustration {
+      width: 100%;
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    .illustration img {
+      max-width: 300px;
+      width: 100%;
+    }
+
+    footer {
+      margin-top: 40px;
+      text-align: center;
+      font-size: 14px;
+      color: #777;
+    }
+
+    @media (max-width: 600px) {
+      textarea {
+        height: 120px;
+      }
+    }
   </style>
 </head>
 <body>
 
-  <h2>Input Text</h2>
-  <button onclick="pasteText()">📋 Paste</button>
-  <textarea id="inputText" placeholder="Paste your markdown text here..."></textarea>
+  <div class="container">
+    <h1>🧹 Markdown & Emoji Cleaner</h1>
+    <div class="author">
+      by <a href="https://igy-apps.com" target="_blank">igy-apps.com</a>
+    </div>
 
-  <h2>Cleaned Output</h2>
-  <button onclick="copyText()">📄 Copy</button>
-  <textarea id="outputText" readonly placeholder="Cleaned text will appear here..."></textarea>
+    <div class="illustration">
+      <img src="images/undraw_file-search_cbur.svg" alt="Cleaner Illustration">
+    </div>
+
+    <h3>Input Text</h3>
+    <button onclick="pasteText()">📋 Paste</button>
+    <textarea id="inputText" placeholder="Paste your markdown text here..."></textarea>
+
+    <h3>Cleaned Output</h3>
+    <button onclick="copyText()">📄 Copy</button>
+    <textarea id="outputText" readonly placeholder="Cleaned text will appear here..."></textarea>
+  </div>
+
+  <footer>
+    &copy; 2025 <a href="https://igy-apps.com" target="_blank" style="color:#007acc; text-decoration:none;">igy-apps.com</a>. All rights reserved.
+  </footer>
 
   <script>
-    // Regex to remove Markdown and emojis
     function cleanText(text) {
-  return text
-    // Remove Markdown syntax
-    .replace(/^#{1,6}\s*/gm, '')                   // headers
-    .replace(/[*_~`]+/g, '')                       // bold, italics, strike, inline code
-    .replace(/!\[.*?\]\(.*?\)/g, '')               // images
-    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')       // links
-    .replace(/^[-*_]{3,}$/gm, '')                  // horizontal rules
-    .replace(/^[\-\*\+]\s*/gm, '')                 // bullets
-
-    // Remove emojis and invisible joiners
-    .replace(/[\u{1F600}-\u{1F6FF}]/gu, '')        // emoticons + transport
-    .replace(/[\u{1F300}-\u{1F5FF}]/gu, '')        // symbols & pictographs
-    .replace(/[\u{1F700}-\u{1F77F}]/gu, '')        // alchemical
-    .replace(/[\u{1F780}-\u{1F7FF}]/gu, '')        // Geometric extensions
-    .replace(/[\u{1F800}-\u{1F8FF}]/gu, '')        // Supplemental arrows
-    .replace(/[\u{1F900}-\u{1F9FF}]/gu, '')        // Supplemental symbols
-    .replace(/[\u{1FA00}-\u{1FAFF}]/gu, '')        // Chess + more
-    .replace(/[\u{2600}-\u{26FF}]/gu, '')          // misc symbols
-    .replace(/[\u{2700}-\u{27BF}]/gu, '')          // dingbats
-    .replace(/[\u{FE00}-\u{FE0F}]/gu, '')          // variation selectors
-    .replace(/[\u{200D}]/gu, '')                   // zero-width joiner (👩‍🏫 etc.)
-    .replace(/[\u{1F1E6}-\u{1F1FF}]/gu, '')        // flags
-    .replace(/[\u{1F3FB}-\u{1F3FF}]/gu, '')        // skin tone modifiers
-
-    // Remove remaining invisible or control characters
-    .replace(/[\u200B-\u200F\u202A-\u202E\u2060-\u206F]/gu, '')
-
-    // Clean spacing
-    .replace(/[ \t]+$/gm, '')                      // trailing spaces
-    .replace(/\n{3,}/g, '\n\n')                    // limit multiple newlines
-    .trim();
-}
-
-
+      return text
+        .replace(/^#{1,6}\s*/gm, '')
+        .replace(/[*_~`]+/g, '')
+        .replace(/!\[.*?\]\(.*?\)/g, '')
+        .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+        .replace(/^[-*_]{3,}$/gm, '')
+        .replace(/^[\-\*\+]\s*/gm, '')
+        .replace(/[\u{1F600}-\u{1FFFF}]/gu, '')
+        .replace(/[\u{2600}-\u{27BF}]/gu, '')
+        .replace(/[\u{FE00}-\u{FE0F}]/gu, '')
+        .replace(/[\u{200D}]/gu, '')
+        .replace(/[\u200B-\u200F\u202A-\u202E\u2060-\u206F]/gu, '')
+        .replace(/[ \t]+$/gm, '')
+        .replace(/\n{3,}/g, '\n\n')
+        .trim();
+    }
 
     function pasteText() {
       navigator.clipboard.readText().then(text => {
@@ -79,6 +171,5 @@
 
     document.getElementById('inputText').addEventListener('input', processText);
   </script>
-
 </body>
 </html>
