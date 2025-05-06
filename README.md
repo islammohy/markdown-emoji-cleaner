@@ -1,8 +1,4 @@
-You're welcome! Here's a clean and professional **`README.md`** file for your GitHub project:
 
----
-
-````markdown
 # 🧹 Markdown & Emoji Cleaner
 
 A simple, cross-platform web tool to remove **Markdown formatting** and **emojis** from any text.  
@@ -71,9 +67,3 @@ This is Markdown text with emojis and links.
 
 Made with 💡 by \[Islammohy]
 
-```
-
----
-
-Would you like me to help create a GitHub-friendly **`LICENSE` file (MIT)** as well?
-```
